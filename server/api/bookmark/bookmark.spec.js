@@ -78,7 +78,7 @@ describe('POST /api/users/{userId}/bookmarks', function() {
       done();
     });
   });
-
+  
   it('should create a bookmark', function(done) {
     request(app)
       .post('/api/users/' + user._id + '/bookmarks')
@@ -98,7 +98,6 @@ describe('POST /api/users/{userId}/bookmarks', function() {
       .post('/api/users/' + user._id + '/bookmarks')
       .send({url: 'invalid URL'})
       .expect(500)
-      .expect('Content-Type', /json/)
       .end(function(err, res) {
         if (err) return done(err);
         done();
