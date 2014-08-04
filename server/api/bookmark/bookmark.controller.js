@@ -1,5 +1,6 @@
 'use strict';
 
+var config = require('../../config/environment');
 var _ = require('lodash');
 var Bookmark = require('./bookmark.model');
 var auth = require('../../auth/auth.service');
@@ -43,10 +44,10 @@ exports.create = function(req, res) {
     var iconv = new Iconv(detected.encoding, 'UTF-8//TRANSLIT//IGNORE');
     return iconv.convert(text).toString();
   };
-  return Q.nfcall(request.get, {
+  Q.nfcall(request.get, {
     url: req.param('url'),
     encoding: 'binary',
-    timeout: 1000 
+    timeout: config.linkCheckerTimeout || 2000 
   })
   .spread(function(response, body) {
     var $ = cheerio.load(convert(new Buffer(body, 'binary')));
@@ -62,7 +63,20 @@ exports.create = function(req, res) {
     return res.status(201).json(bookmark);
   })
   .catch(function(err) {
-    return handleError(res, err);
+    Q(Bookmark.create({
+      url: req.param('url'),
+      title: '',
+      content: '',
+      description: '',
+      userId: req.params.userId
+    }))
+    .then(function(bookmark) {
+      return res.status(201).json(bookmark);
+    })
+    .catch(function(err) {
+      return handleError(res, err);
+    })
+    .done();
   })
   .done();
 };

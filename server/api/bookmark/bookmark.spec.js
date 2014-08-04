@@ -88,6 +88,7 @@ describe('POST /api/users/{userId}/bookmarks', function() {
       .end(function(err, res) {
         if (err) return done(err);
         res.body.url.should.equal('http://example.com/');
+        res.body.title.should.equal('Example Domain');
         res.body.userId.should.equal(user._id.toString());
         done();
       });
@@ -96,10 +97,13 @@ describe('POST /api/users/{userId}/bookmarks', function() {
   it('should happen error when specified URL is invlaid', function(done) {
     request(app)
       .post('/api/users/' + user._id + '/bookmarks')
-      .send({url: 'invalid URL'})
-      .expect(500)
+      .send({url: 'http://example.notfound/'})
+      .expect(201)
       .end(function(err, res) {
         if (err) return done(err);
+        res.body.url.should.equal('http://example.notfound/');
+        res.body.title.should.equal('');
+        res.body.userId.should.equal(user._id.toString());
         done();
       });
   });
