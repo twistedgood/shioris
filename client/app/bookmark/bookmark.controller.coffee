@@ -22,5 +22,6 @@ angular.module('shiorisApp').controller 'BookmarkCtrl', ($scope, $http, socket, 
  
   $scope.searchBookmark = () ->
     query = $scope.query
-    $http.get("/api/users/#{userId}/bookmarks?q=#{query}")
+    $http.get("/api/users/#{userId}/bookmarks?q=#{query}").success (bookmarks) ->
+      $scope.bookmarks = bookmarks
  

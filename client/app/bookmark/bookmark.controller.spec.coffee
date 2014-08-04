@@ -29,7 +29,7 @@ describe 'Controller: BookmarkCtrl', ->
     $httpBackend.flush()
     expect(scope.bookmarks.length).toEqual 2
 
-  it 'should attach a search list of bookamrks', ->
+  it 'should attach a queried list of bookamrks', ->
     $httpBackend.expectGET('/api/users/test_user/bookmarks?q=test_query').respond 200
     scope.query = 'test_query'
     scope.searchBookmark()
