@@ -2,12 +2,11 @@
 
 angular.module('shiorisApp').controller 'BookmarkCtrl', ($scope, $http, socket, Auth) ->
   $scope.bookmarks = [];
-  $scope.message = 'Hello'
   userId = Auth.getCurrentUser()._id
 
   $http.get("/api/users/#{userId}/bookmarks").success (bookmarks) ->
     $scope.bookmarks = bookmarks;
-    socket.syncUpdates 'bookamrk', $scope.bookmark
+    socket.syncUpdates 'bookmark', $scope.bookmarks
   
   $scope.addBookmark = () ->
     unless $scope.bookmark.url is ''
