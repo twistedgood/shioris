@@ -2,6 +2,7 @@
 
 var express = require('express');
 var controller = require('./user.controller');
+var bookmarkController = require('../bookmark/bookmark.controller');
 var config = require('../../config/environment');
 var auth = require('../../auth/auth.service');
 
@@ -13,5 +14,12 @@ router.get('/me', auth.isAuthenticated(), controller.me);
 router.put('/:id/password', auth.isAuthenticated(), controller.changePassword);
 router.get('/:id', auth.isAuthenticated(), controller.show);
 router.post('/', controller.create);
+
+router.route('/:userId/bookmarks')
+.get(bookmarkController.index)
+.post(bookmarkController.create);
+
+router.route('/:userId/bookmarks/:id')
+.delete(bookmarkController.destroy);
 
 module.exports = router;

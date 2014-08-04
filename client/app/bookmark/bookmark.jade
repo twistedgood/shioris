@@ -1,2 +1,26 @@
-.col-md-12
-    | This is the bookmark view.
+div(ng-include="'components/navbar/navbar.html'")
+div.container(ng-controller="BookmarkCtrl")
+  h2 New Shiori
+  form
+    div.input-group
+      input.form-control(placeholder="Add a new URL here.", ng-model="bookmark.url")
+      span.input-group-btn
+        button.btn.btn-primary(ng-click="addBookmark()")
+          span.glyphicon.glyphicon-plus
+
+  h2 My Shioris
+  form
+    div.input-group
+      input.form-control(placeholder="Input search text here.", ng-model="query")
+      span.input-group-btn
+        button.btn.btn-primary(ng-click="searchBookmark()")
+          span.glyphicon.glyphicon-search
+
+  ul.list-group
+    li.list-group-item(ng-repeat="bookmark in bookmarks")
+      a(href="{{bookmark.url}}")
+        img(src="http://www.google.com/s2/favicons?domain_url={{bookmark.url}}")
+        span {{bookmark.url}}
+      a.trash(ng-click="deleteBookmark(bookmark)")
+        span.glyphicon.glyphicon-trash.pull-right
+        

@@ -3,19 +3,25 @@
 angular.module('shiorisApp').controller 'BookmarkCtrl', ($scope, $http, socket, Auth) ->
   $scope.bookmarks = [];
   $scope.message = 'Hello'
+  userId = Auth.getCurrentUser()._id
 
-  $http.get('/api/bookmarks?u=' + Auth.getCurrentUser()._id).success (bookmarks) ->
+  $http.get("/api/users/#{userId}/bookmarks").success (bookmarks) ->
     $scope.bookmarks = bookmarks;
-    #socket.syncUpdates 'bookamrk', $scope.bookmark
+    socket.syncUpdates 'bookamrk', $scope.bookmark
   
   $scope.addBookmark = () ->
     unless $scope.bookmark.url is ''
-      $http.post('/api/bookmarks', {
+      $http.post("/api/users/#{userId}/bookmarks", {
         url: $scope.bookmark.url,
-        userId: Auth.getCurrentUser()._id
+        userId: userId
       }).success () ->
         $scope.bookmark.url = ''
 
   $scope.deleteBookmark = (bookmark) ->
-    $http.delete('/api/bookmarks/' + bookmark._id)
-
+    id = bookmark._id
+    $http.delete("/api/users/#{userId}/bookmarks/#{id}")
+ 
+  $scope.searchBookmark = () ->
+    query = $scope.query
+    $http.get("/api/users/#{userId}/bookmarks?q=#{query}")
+ 
