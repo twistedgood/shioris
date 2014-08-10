@@ -48,6 +48,31 @@ describe('Memo', function() {
     });
   });
 
+  describe('GET /api/users/{userId}/memos/{id}', function() {
+    it('should respond a memo', function(done) {
+      request(app)
+        .get('/api/users/' + user._id + '/memos/' + memos[1]._id)
+        .expect(200)
+        .expect('Content-Type', /json/)
+        .end(function(err, res) {
+          if (err) return done(err);;
+          res.body.title.should.equal('Test Memo 2');
+          res.body.content.should.equal('woo yeah');
+          res.body.userId.should.equal(user._id.toString());
+          done();
+        });
+    });
+    it('should return Not Found if not exists', function(done) {
+      request(app)
+        .get('/api/users/' + user._id + '/memos/' + '111111111111')
+        .expect(404)
+        .end(function(err, res) {
+          if (err) return done(err);
+          done();
+        });
+    });
+  });
+
   describe('GET /api/users/{userId}/memos', function() {
     it('should respond with JSON array', function(done) {
       request(app)
@@ -98,6 +123,16 @@ describe('Memo', function() {
           res.body.title.should.equal('Test Memo 1-1');
           res.body.content.should.equal('foo foo');
           res.body.userId.should.equal(user._id.toString());
+          done();
+        });
+    });
+    it('should return Not Found if not exists', function(done) {
+      request(app)
+        .put('/api/users/' + user._id + '/memos/' + memos[0]._id)
+        .send({ title: '' })
+        .expect(500)
+        .end(function(err, res) {
+          if (err) return done(err);
           done();
         });
     });
