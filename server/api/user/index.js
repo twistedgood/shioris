@@ -28,6 +28,7 @@ router.route('/:userId/memos')
 .post(memoController.create);
 
 router.route('/:userId/memos/:id')
+.get(memoController.show)
 .put(memoController.update)
 .delete(memoController.destroy);
 

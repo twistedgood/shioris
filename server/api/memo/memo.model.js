@@ -6,7 +6,7 @@ var mongoose = require('mongoose'),
     timestamps = require('mongoose-timestamp');
 
 var MemoSchema = new Schema({
-  title: String,
+  title: { type: String, required: true},
   content: String,
   userId: ObjectId
 });
