@@ -3,6 +3,7 @@
 var express = require('express');
 var controller = require('./user.controller');
 var bookmarkController = require('../bookmark/bookmark.controller');
+var memoController = require('../memo/memo.controller');
 var config = require('../../config/environment');
 var auth = require('../../auth/auth.service');
 
@@ -21,5 +22,14 @@ router.route('/:userId/bookmarks')
 
 router.route('/:userId/bookmarks/:id')
 .delete(bookmarkController.destroy);
+
+router.route('/:userId/memos')
+.get(memoController.index)
+.post(memoController.create);
+
+router.route('/:userId/memos/:id')
+.put(memoController.update)
+.delete(memoController.destroy);
+
 
 module.exports = router;

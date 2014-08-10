@@ -47,7 +47,7 @@ exports.create = function(req, res) {
   Q.nfcall(request.get, {
     url: req.param('url'),
     encoding: 'binary',
-    timeout: config.linkCheckerTimeout || 2000 
+    timeout: config.linkCheckerTimeout || 3000 
   })
   .spread(function(response, body) {
     var $ = cheerio.load(convert(new Buffer(body, 'binary')));
