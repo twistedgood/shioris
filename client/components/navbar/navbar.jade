@@ -16,6 +16,9 @@ div.navbar.navbar-default.navbar-static-top(ng-controller='NavbarCtrl')
         li(ng-show='isLoggedIn()', ng-class='{active: isActive("/bookmark")}')
           a(href='/bookmark') Shiori
 
+        li(ng-show='isLoggedIn()', ng-class='{active: isActive("/memo")}')
+          a(href='/memo') Memo
+
         li(ng-show='isAdmin()', ng-class='{active: isActive("/admin")}')
           a(href='/admin') Admin
 

@@ -5,3 +5,4 @@ angular.module('shiorisApp').config ($stateProvider) ->
     url: '/bookmark'
     templateUrl: 'app/bookmark/bookmark.html'
     controller: 'BookmarkCtrl'
+    authenticate: true
