@@ -12,7 +12,7 @@ angular.module 'shiorisApp'
     socket.syncUpdates 'bookmark', $scope.bookmarks
   
   $scope.addBookmark = () ->
-    unless $scope.bookmark.url?
+    unless $scope.bookmark.url is ''
       $http.post "/api/users/#{userId}/bookmarks",
         url: $scope.bookmark.url
         userId: userId
