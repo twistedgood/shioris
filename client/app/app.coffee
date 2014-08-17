@@ -7,6 +7,7 @@ angular.module 'shiorisApp', [
   'btford.socket-io',
   'ui.router',
   'ui.bootstrap',
+  'ngAnimate',
   'hc.marked'
 ]
 .config ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) ->

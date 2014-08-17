@@ -3,27 +3,6 @@ div(ng-include="'components/navbar/navbar.html'")
 .container(ng-controller="MemoCtrl")
         
   tabset
-    tab(heading="Edit", active=true)
-      form
-        input.form-control(ng-model="memo.title")
-        .row.row-memo-edit
-          .col-lg-6
-            textarea.form-control(ng-model="memo.content" ,class="memo-edit" ,rows=10)
-          .col-lg-6
-            .panel.panel-default
-              .panel-body
-                div(marked="memo.content")
-        span.input-group-btn
-          button.btn.btn-primary(ng-click="saveMemo()")
-            span.glyphicon.glyphicon-ok
-            span OK
-          button.btn.btn-default(type="reset")
-            span Reset
-          a.btn.btn-default(href="#/memo")
-            span Cancel
-          button.btn.btn-primary(ng-click="deleteMemo()")
-            span Remove 
-
     tab(heading="View")
       .panel.panel-default
         .panel-heading
@@ -34,4 +13,8 @@ div(ng-include="'components/navbar/navbar.html'")
     tab(heading="Raw")
       pre {{memo.content}}
 
-      
+    .input-group-btn
+      a.btn.btn-default.pull-right(ng-click="deleteMemo()")
+        span Remove 
+      a.btn.btn-default.pull-right(href, ui-sref="memo-edit({id: memo._id})")
+        span Edit 
