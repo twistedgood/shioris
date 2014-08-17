@@ -1,0 +1,23 @@
+div(ng-include="'components/navbar/navbar.html'")
+
+.container(ng-controller="MemoCtrl")
+        
+  form
+    input.form-control(ng-model="memo.title")
+    .row.row-memo-edit
+      .col-lg-6
+        textarea.form-control(ng-model="memo.content" ,class="memo-edit", rows=20)
+        .input-group-btn
+          button.btn.btn-primary(ng-click="saveMemo()")
+            span.glyphicon.glyphicon-ok
+            span OK
+          a.btn.btn-default.pull-right(href="#/memo")
+            span Cancel
+        alert(ng-show="alert", type="{{alert.type}}")
+          {{alert.msg}}
+      .col-lg-6
+        .panel.panel-default
+          .panel-body(style="height:400px;overflow:scroll;")
+            div(marked="memo.content")
+
+
