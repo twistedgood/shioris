@@ -422,7 +422,7 @@ module.exports = function (grunt) {
       test: {
         options: {
           reporter: 'spec',
-          require: 'coverage/blanket'
+          require: 'blanket'
         },
         src: ['server/**/*.spec.js']
       },
@@ -430,7 +430,7 @@ module.exports = function (grunt) {
         options: {
           reporter: 'html-cov',
           quiet: true,
-          captureFile: 'coverage.html'
+          captureFile: 'coverage/server/index.html'
         },
         src: ['server/**/*.spec.js']
       }

@@ -24,6 +24,7 @@ module.exports = function(config) {
       'client/bower_components/angular-ui-router/release/angular-ui-router.js',
       'client/bower_components/angular-marked/angular-marked.js',
       'client/bower_components/marked/lib/marked.js',
+      'client/bower_components/angular-animte/angular-animate.js',
       'client/app/app.js',
       'client/app/app.coffee',
       'client/app/**/*.js',
@@ -33,14 +34,19 @@ module.exports = function(config) {
       'client/app/**/*.jade',
       'client/components/**/*.jade',
       'client/app/**/*.html',
-      'client/components/**/*.html'
+      'client/components/**/*.html',
+      '.tmp/app/**/*.js',
+      '.tmp/components/**/*.js',
     ],
 
     preprocessors: {
       '**/*.jade': 'ng-jade2js',
       '**/*.html': 'html2js',
       '**/*.coffee': 'coffee',
+      '.tmp/**/*.js': 'coverage'
     },
+
+    reporters: ['progress', 'coverage'],
 
     ngHtml2JsPreprocessor: {
       stripPrefix: 'client/'
