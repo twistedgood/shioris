@@ -1,5 +1,7 @@
 'use strict'
 
+expect = chai.expect
+
 describe 'Controller: MainCtrl', ->
 
   # load the controller's module
@@ -25,4 +27,4 @@ describe 'Controller: MainCtrl', ->
 
   it 'should attach a list of things to the scope', ->
     $httpBackend.flush()
-    expect(scope.awesomeThings.length).toBe 4
+    expect(scope.awesomeThings.length).to.equal 4

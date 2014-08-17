@@ -1,5 +1,7 @@
 'use strict'
 
+expect = chai.expect
+
 describe 'Controller: MemoCtrl', ->
 
   # load the controller's module
@@ -21,4 +23,4 @@ describe 'Controller: MemoCtrl', ->
       $scope: scope
 
   it 'should ...', ->
-    expect(1).toEqual 1
+    expect(1).to.equal 1
