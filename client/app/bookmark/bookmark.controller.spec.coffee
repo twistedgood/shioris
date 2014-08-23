@@ -1,7 +1,5 @@
 'use strict'
 
-expect = chai.expect;
-
 describe 'Controller: BookmarkCtrl', ->
 
   # load the controller's module
@@ -30,8 +28,7 @@ describe 'Controller: BookmarkCtrl', ->
 
   it 'should attach a list of bookamrks', ->
     $httpBackend.flush()
-
-    expect(scope.bookmarks.length).to.equal 2
+    expect(scope.bookmarks.length).toEqual 2
 
   it 'should attach a queried list of bookamrks', ->
     $httpBackend.expectGET '/api/users/test_user/bookmarks?q=test_query'
@@ -47,8 +44,13 @@ describe 'Controller: BookmarkCtrl', ->
     .respond 201
     scope.bookmark = {url: 'http://example.org/'}
     scope.addBookmark()
-    $httpBackend.flush()
-    expect(scope.bookmark.url).to.equal ''
+    $httpBackend.flush() 
+    expect(scope.bookmark.url).toEqual ''
+
+  it 'should not add a bookamrk', ->
+    scope.bookmark = {url: ''}
+    scope.addBookmark()
+    expect(scope.bookmark.url).toEqual ''
   
   it 'should delete the bookmark', ->
     $httpBackend.expectDELETE '/api/users/test_user/bookmarks/test_bookmark'
